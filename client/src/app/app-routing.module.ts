@@ -1,3 +1,6 @@
+import { ServerErrorComponent } from './Errors/server-error/server-error.component';
+import { NotFoundComponent } from './Errors/not-found/not-found.component';
+import { TestErrorsComponent } from './Errors/test-errors/test-errors.component';
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -15,12 +18,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: "members", component: MemberListComponent, canActivate: [AuthGuard] },
-      { path: "members/:id", component: MemberDetailComponent },
+      { path: "members/:username", component: MemberDetailComponent },
       { path: "lists", component: ListsComponent },
       { path: "messages", component: MessagesComponent },
     ]
   },  
-  { path: "**", component: HomeComponent ,pathMatch:"full"},
+  {path:'errors', component:TestErrorsComponent},
+  {path:'not-found', component:NotFoundComponent},
+  {path:'server-error', component:ServerErrorComponent},
+  { path: "**", component: NotFoundComponent ,pathMatch:"full"},
 ];
 
 @NgModule({
